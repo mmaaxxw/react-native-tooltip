@@ -35,20 +35,18 @@ RCT_EXPORT_METHOD(show:(nonnull NSNumber *)reactTag
 
     if([arrowDirection isEqualToString: @"up"]){
       menuCont.arrowDirection = UIMenuControllerArrowUp;
-    } else if ([arrowDirection isEqualToString: @"right"]){
+    }else if ([arrowDirection isEqualToString: @"right"]){
       menuCont.arrowDirection = UIMenuControllerArrowRight;
-    } else if ([arrowDirection isEqualToString: @"left"]) {
+    }else if ([arrowDirection isEqualToString: @"left"]) {
       menuCont.arrowDirection = UIMenuControllerArrowLeft;
-    } else if ([arrowDirection isEqualToString: @"down"]) {
-      menuCont.arrowDirection = UIMenuControllerArrowDown;
     } else {
-      menuCont.arrowDirection = UIMenuControllerArrowDefault;   
+      menuCont.arrowDirection = UIMenuControllerArrowDown;
     }
     menuCont.menuItems = menuItems;
-    [menuCont setMenuVisible:YES animated:YES];
+//    [menuCont setMenuVisible:YES animated:YES];
 }
 
-RCT_EXPORT_METHOD(hide){   
+RCT_EXPORT_METHOD(hide){
     UIMenuController *menuCont = [UIMenuController sharedMenuController];
     [menuCont setMenuVisible:NO animated:NO];
 }

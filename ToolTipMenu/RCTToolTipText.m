@@ -10,10 +10,15 @@
 
 - (id)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher
 {
+    NSLog(@"tooltip 1123");
     if ((self = [super initWithFrame:CGRectZero])) {
         _eventDispatcher = eventDispatcher;
     }
-    
+
+//        UIMenuItem *customMenuItem1 = [[UIMenuItem alloc] initWithTitle:@"Custom 1qa" action:@selector(customAction1)];
+//        UIMenuItem *customMenuItem2 = [[UIMenuItem alloc] initWithTitle:@"Custom 2wa" action:@selector(customAction2)];
+//        [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:customMenuItem1, customMenuItem2, nil]];
+     NSLog(@"tooltip 5555");
     return self;
 }
 
@@ -23,6 +28,22 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (BOOL) canBecomeFirstResponder
 {
     return YES;
+}
+
+- (void) customAction1 {
+  NSLog(@"custom action 1x1x");
+    _nativeEventCount++;
+    [_eventDispatcher sendTextEventWithType:RCTTextEventTypeChange
+                                   reactTag:self.reactTag
+                                       text:@"customAction1"
+                                        key:nil
+                                 eventCount:_nativeEventCount];
+      NSLog(@"custom action 1x1 after send");
+}
+
+- (void) customAction2 {
+  NSLog(@"custom action 2z1");
+
 }
 
 - (void)tappedMenuItem:(NSString *)text {
@@ -45,6 +66,11 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    NSLog(@"tooltip canPerformAction 333");
+        if (action == @selector(customAction1) || action == @selector(customAction2)) {
+          return YES;
+        }
+
     NSString *sel = NSStringFromSelector(action);
     NSRange match = [sel rangeOfString:@"magic_"];
     if (match.location == 0) {
